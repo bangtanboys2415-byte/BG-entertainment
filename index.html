@@ -1,0 +1,444 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BG Entertainments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      filter: blur(100px);
+      top: -100px;
+      left: -100px;
+      animation: floating 10s infinite alternate ease-in-out;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      filter: blur(120px);
+      bottom: -100px;
+      right: -100px;
+      animation: floating2 12s infinite alternate ease-in-out;
+      z-index: -1;
+    }
+
+    @keyframes floating {
+      from {
+        transform: translateY(0px) translateX(0px);
+      }
+      to {
+        transform: translateY(80px) translateX(80px);
+      }
+    }
+
+    @keyframes floating2 {
+      from {
+        transform: translateY(0px) translateX(0px);
+      }
+      to {
+        transform: translateY(-80px) translateX(-60px);
+      }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 8%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      margin-left: 25px;
+      font-size: 1rem;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      width: 0;
+      height: 2px;
+      background: white;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 8%;
+      position: relative;
+    }
+
+    .hero-content {
+      animation: fadeIn 1.5s ease;
+    }
+
+    .hero h1 {
+      font-size: 5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: auto;
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+
+    .hero-btn {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 15px 40px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: 0.4s;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-btn:hover {
+      background: white;
+      color: black;
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+
+    .floating-cube {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border: 2px solid rgba(255,255,255,0.15);
+      transform-style: preserve-3d;
+      animation: rotateCube 10s linear infinite;
+    }
+
+    .cube1 {
+      top: 20%;
+      left: 10%;
+    }
+
+    .cube2 {
+      bottom: 15%;
+      right: 12%;
+      animation-duration: 14s;
+    }
+
+    @keyframes rotateCube {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg);
+      }
+      100% {
+        transform: rotateX(360deg) rotateY(360deg);
+      }
+    }
+
+    section {
+      padding: 120px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 60px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .artists {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 25px;
+      overflow: hidden;
+      transition: 0.5s;
+      backdrop-filter: blur(15px);
+      transform-style: preserve-3d;
+    }
+
+    .card:hover {
+      transform: translateY(-15px) rotateX(5deg) rotateY(-5deg);
+      box-shadow: 0 20px 40px rgba(255,255,255,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: 0.5s;
+    }
+
+    .card:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 25px;
+    }
+
+    .card-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .card-content p {
+      opacity: 0.7;
+      line-height: 1.7;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+      font-size: 1.1rem;
+      line-height: 2;
+      opacity: 0.85;
+    }
+
+    .contact-box {
+      max-width: 700px;
+      margin: auto;
+      padding: 50px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .contact-box p {
+      opacity: 0.7;
+      margin-bottom: 30px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 14px 35px;
+      border: 1px solid white;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: 0.4s;
+    }
+
+    .contact-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      opacity: 0.6;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width: 900px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .contact-box {
+        padding: 30px;
+      }
+    }
+  </style></head>
+<body>  <header>
+    <div class="logo">BG</div><nav>
+  <a href="#home">Home</a>
+  <a href="#artists">Artists</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+  </header>  <section class="hero" id="home">
+    <div class="floating-cube cube1"></div>
+    <div class="floating-cube cube2"></div><div class="hero-content">
+  <h1>BG Entertainments</h1>
+  <p>
+    A futuristic K-pop entertainment experience with immersive visuals,
+    stylish artists, powerful performances, and next generation digital creativity.
+  </p>
+
+  <a href="#artists" class="hero-btn">Explore Artists</a>
+</div>
+
+  </section>  <section id="artists">
+    <h2 class="section-title">Our Artists</h2><div class="artists">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="artist">
+
+    <div class="card-content">
+      <h3>Nova Girls</h3>
+      <p>
+        Powerful vocals, futuristic concepts, and stunning performances redefining modern K-pop.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop" alt="artist">
+
+    <div class="card-content">
+      <h3>Shadow X</h3>
+      <p>
+        A mysterious performance group known for cinematic visuals and dark elegant concepts.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1200&auto=format&fit=crop" alt="artist">
+
+    <div class="card-content">
+      <h3>Velocity</h3>
+      <p>
+        Dynamic choreography and global energy bringing a futuristic stage presence to fans.
+      </p>
+    </div>
+  </div>
+</div>
+
+  </section>  <section id="about">
+    <h2 class="section-title">About BG</h2><div class="about">
+  BG Entertainments is a modern entertainment company focused on music,
+  digital experiences, fashion, and immersive storytelling.
+  Our vision is to create a new generation of global K-pop culture with
+  cinematic visuals, futuristic concepts, and unforgettable artist branding.
+</div>
+
+  </section>  <section id="contact">
+    <div class="contact-box">
+      <h2>Join The Future</h2>
+      <p>
+        Become part of the next generation entertainment movement.
+      </p><a href="#" class="contact-btn">Contact Us</a>
+</div>
+
+  </section>  <footer>
+    © 2026 BG Entertainments — All Rights Reserved.
+  </footer>  <script>
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - 0.5) * 20;
+        const rotateX = ((y / rect.height) - 0.5) * -20;
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0) rotateY(0)';
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const scroll = window.scrollY;
+      document.querySelector('.hero-content').style.transform = `translateY(${scroll * 0.2}px)`;
+    });
+  </script></body>
+</html>
