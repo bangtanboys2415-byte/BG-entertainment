@@ -368,9 +368,9 @@
     <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop" alt="artist">
 
     <div class="card-content">
-      <h3>Nova Girls</h3>
+      <h3>LOCKETTES</h3>
       <p>
-        Powerful vocals, futuristic concepts, and stunning performances redefining modern K-pop.
+        A next generation K-pop girl group under BT Entertainments known for futuristic concepts, powerful performances, and cinematic visuals.
       </p>
     </div>
   </div>
@@ -436,9 +436,81 @@
       });
     });
 
+    // Smooth reveal animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0px)';
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    document.querySelectorAll('section, .card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(60px)';
+      el.style.transition = 'all 1s ease';
+      observer.observe(el);
+    });
+
+    // Parallax effect
     window.addEventListener('scroll', () => {
       const scroll = window.scrollY;
+
       document.querySelector('.hero-content').style.transform = `translateY(${scroll * 0.2}px)`;
+
+      document.querySelectorAll('.floating-cube').forEach((cube, index) => {
+        cube.style.transform = `rotateX(${scroll * 0.1}deg) rotateY(${scroll * 0.1}deg) translateY(${scroll * 0.1}px)`;
+      });
+    });
+
+    // Dynamic cursor glow
+    const cursor = document.createElement('div');
+    cursor.style.width = '25px';
+    cursor.style.height = '25px';
+    cursor.style.border = '2px solid white';
+    cursor.style.borderRadius = '50%';
+    cursor.style.position = 'fixed';
+    cursor.style.pointerEvents = 'none';
+    cursor.style.zIndex = '9999';
+    cursor.style.transition = 'transform 0.08s linear';
+    cursor.style.backdropFilter = 'blur(4px)';
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX - 12 + 'px';
+      cursor.style.top = e.clientY - 12 + 'px';
+    });
+
+    // Auto active navbar links
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+
+        if (pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Loading animation
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
     });
   </script></body>
 </html>
